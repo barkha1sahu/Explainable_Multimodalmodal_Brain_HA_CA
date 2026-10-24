@@ -1,0 +1,4 @@
+Hand: constant ('R' only) -> dropped
+Delay: 95.4% missing -> dropped as a feature
+CDR missing rows correspond to subjects aged 18-58 (never clinically assessed) -> excluded from modeling, not imputed
+Duplicate rows: 0, Duplicate IDs: 0

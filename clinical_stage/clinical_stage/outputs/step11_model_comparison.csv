@@ -1,0 +1,5 @@
+Feature set,Model,Accuracy,Precision (weighted),Recall (weighted),F1 (weighted),ROC-AUC
+with_MMSE,Logistic Regression,0.787,0.787,0.787,0.785,0.906
+with_MMSE,Random Forest,0.83,0.836,0.83,0.826,0.934
+without_MMSE,Logistic Regression,0.809,0.81,0.809,0.806,0.881
+without_MMSE,Random Forest,0.766,0.768,0.766,0.767,0.845

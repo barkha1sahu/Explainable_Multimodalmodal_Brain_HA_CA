@@ -1,0 +1,36 @@
+Total rows in original Excel file: 436
+Rows usable for supervised modeling (CDR present): 235
+Rows excluded (CDR not clinically assessed, age <= 58): 201
+
+Missing values (original file): Educ=201, SES=220, MMSE=201, CDR=201, Delay=416
+
+Target: CDR, binarized as 0 (Nondemented) vs 1 (CDR>0, cognitively impaired spectrum)
+Target distribution: {0: 135, 1: 100}
+
+Features used (with MMSE): ['Age', 'Educ', 'SES', 'eTIV', 'nWBV', 'ASF', 'MMSE', 'M/F']
+Features used (without MMSE, leakage-sensitivity check): ['Age', 'Educ', 'SES', 'eTIV', 'nWBV', 'ASF', 'M/F']
+Excluded: ID, Hand (constant), Delay (>95% missing), CDR (target itself)
+
+Preprocessing: median imputation + standard scaling for numeric features; most-frequent imputation + one-hot encoding for M/F; fit on training data only.
+
+Models trained: Logistic Regression, Random Forest (baseline, minimal tuning)
+
+Evaluation metrics (see outputs/step11_model_comparison.csv for exact numbers):
+
+ Feature set               Model  Accuracy  Precision (weighted)  Recall (weighted)  F1 (weighted)  ROC-AUC
+   with_MMSE Logistic Regression     0.787                 0.787              0.787          0.785    0.906
+   with_MMSE       Random Forest     0.830                 0.836              0.830          0.826    0.934
+without_MMSE Logistic Regression     0.809                 0.810              0.809          0.806    0.881
+without_MMSE       Random Forest     0.766                 0.768              0.766          0.767    0.845
+
+Limitations:
+- Sample size is small (235 clinically-assessed subjects) for machine learning.
+- CDR=2 class has only 2 subjects; binary formulation was used instead of multiclass.
+- MMSE is highly related to CDR by construction; models with/without MMSE are reported to make this transparent.
+- Subjects without a CDR rating are structurally younger; the model does not generalize to that unassessed population.
+- This model predicts CDR-based cognitive status, not a clinical Alzheimer's diagnosis.
+
+Multimodal connection (future work, NOT implemented here):
+MRI -> CNN/Transfer Learning -> MRI feature vector
+Clinical data -> Clinical model -> Clinical feature vector
+[MRI feature vector + Clinical feature vector] -> Feature Fusion -> Final Multimodal Model

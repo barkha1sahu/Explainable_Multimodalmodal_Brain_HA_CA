@@ -1,0 +1,5 @@
+Variable 1,Variable 2,Test used,Statistic (rho),p-value,Interpretation
+Age,MMSE,Spearman correlation,-0.34,0.0,Moderate relationship
+Age,CDR,Spearman correlation,0.28,0.0,Weak/monotonic relationship
+MMSE,CDR,Spearman correlation,-0.708,0.0,Strong negative relationship
+nWBV,CDR,Spearman correlation,-0.518,0.0,Moderate negative relationship
